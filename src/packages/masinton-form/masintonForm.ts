@@ -115,14 +115,16 @@ const useMasintonForm = (formData: MasintonForm, validation?: MasintonValidation
   function masintonValidation(options: MasintonValidationOptions = {
     ignoreValidation: undefined,
   }) {
+    if (!validation) return
     const newMasintonForm = structuredClone(masintonForm);
     const { ignoreValidation } = options;
 
-    if (!ignoreValidation || !validation) return;
-    ignoreValidation.forEach((type) => {
-      newMasintonForm[type].error = false;
-      newMasintonForm[type].errorMessage = '';
-    });
+    if (ignoreValidation) {
+      ignoreValidation.forEach((type) => {
+        newMasintonForm[type].error = false;
+        newMasintonForm[type].errorMessage = '';
+      });
+    }
 
     const filteredValidation = ignoreValidation
       ? Object.keys(validation).filter((fieldName) => !ignoreValidation.includes(fieldName))

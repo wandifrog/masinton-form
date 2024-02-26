@@ -37,9 +37,9 @@ const Page = () => {
   } = masintonForm;
 
   function handleSubmit() {
-    masintonValidation()
-    console.log(1234, masintonForm);
-
+    if (masintonValidation()) {
+      alert(`login`)
+    }
   }
 
   return (
