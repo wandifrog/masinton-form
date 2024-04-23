@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { objectsEqual } from './utils';
+import { MasintonData, MasintonForm, MasintonValidation, MasintonValidationOptions } from './types';
 
 
 /**
@@ -43,7 +44,7 @@ import { objectsEqual } from './utils';
 *   );
 * };
 */
-const useMasintonForm = (formData: MasintonForm, validation?: MasintonValidation) => {
+const useMasintonForm2 = (formData: MasintonForm, validation?: MasintonValidation) => {
   const [initialForm, setInitialForm] = useState(formData);
   const [masintonForm, setMasintonForm] = useState(initialForm);
   const [masintonWatch, setMasintonWatch] = useState({ edited: false });
@@ -115,16 +116,15 @@ const useMasintonForm = (formData: MasintonForm, validation?: MasintonValidation
   function masintonValidation(options: MasintonValidationOptions = {
     ignoreValidation: undefined,
   }) {
-    if (!validation) return
     const newMasintonForm = structuredClone(masintonForm);
     const { ignoreValidation } = options;
+    if (!ignoreValidation) return;
+    ignoreValidation.forEach((type) => {
+      newMasintonForm[type].error = false;
+      newMasintonForm[type].errorMessage = '';
+    });
 
-    if (ignoreValidation) {
-      ignoreValidation.forEach((type) => {
-        newMasintonForm[type].error = false;
-        newMasintonForm[type].errorMessage = '';
-      });
-    }
+    if (!validation) return
 
     const filteredValidation = ignoreValidation
       ? Object.keys(validation).filter((fieldName) => !ignoreValidation.includes(fieldName))
@@ -155,8 +155,8 @@ const useMasintonForm = (formData: MasintonForm, validation?: MasintonValidation
     masintonForm,
     masintonWatch,
     masintonChange,
-    masintonMultiChange,
     masintonMagic,
+    masintonMultiChange,
     masintonReplace,
     masintonReset,
     masintonSubmit,
@@ -164,4 +164,4 @@ const useMasintonForm = (formData: MasintonForm, validation?: MasintonValidation
   };
 };
 
-export default useMasintonForm;
+export default useMasintonForm2;

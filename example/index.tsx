@@ -1,4 +1,6 @@
-import useMasintonForm from './packages/masinton-form';
+import React from 'react'
+import { MasintonForm, MasintonValidation } from "../src/types";
+import useMasintonForm from "../src";
 
 const formData: MasintonForm = {
   username: {
@@ -27,7 +29,6 @@ const validation: MasintonValidation = {
     },
   ],
 };
-
 
 const Page = () => {
   const { masintonForm, masintonChange, masintonValidation } = useMasintonForm(formData, validation);

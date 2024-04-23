@@ -1,26 +1,26 @@
-type MasintonForm = {
+export type MasintonForm = {
     [key: string]: MasintonField;
 }
 
-type MasintonField = {
+export type MasintonField = {
     value: any;
     error: boolean;
     errorMessage: string;
 }
 
-type MasintonValidation = {
+export type MasintonValidation = {
     [key: string]: MasintonValidationRule[];
 }
 
-type MasintonValidationRule = {
+export type MasintonValidationRule = {
     rule: RegExp;
     errorMessage: string;
 }
 
-type MasintonValidationOptions = {
+export type MasintonValidationOptions = {
     ignoreValidation?: string[];
 }
 
-type MasintonData = {
+export type MasintonData = {
     [key: string]: any;
 }
